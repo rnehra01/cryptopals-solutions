@@ -15,6 +15,9 @@ class __SHA1():
 	def __ROTL(n, x, w=32):
 		return ((x << n) | (x >> w - n))
 
+	# Padding
+	# All hashing are padded until the length is 8 bytes less than a full (64-byte) block
+	# data + padding bytes 0x00(starting with 0x80) + 8 byte bit-length of data in big-endian
 	def pre_process(self):
 		ml = len(self.data)
 		#Append bit '1' 
@@ -29,7 +32,10 @@ class __SHA1():
 		#Append bit-length of data
 		self.data = self.data + ml
 		self.data = self.data.decode('hex')
-		
+
+
+	# SHA1 is an iterating hashing algorithm
+	# Each internal state depends on the previous one	
 	def hash(self):
 		MASK = 2**32-1
 		self.pre_process()
