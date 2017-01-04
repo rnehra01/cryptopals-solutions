@@ -1,5 +1,5 @@
+# Lenght-extension attack
 from SHA1 import __SHA1
-
 
 # Generates hex-encoded padding 
 def calculate_SHA_padding(data):
@@ -30,7 +30,10 @@ if __name__ == '__main__':
 
 	for key_length in range(15):
 		print 'Trying key length : %d' % key_length
+
 		attack_msg = msg + calculate_SHA_padding(key_length*'a' + msg).decode('hex') + ';admin=true'
+		
+		# msg_sha1 is used to get internal state
 		attack_hash = __SHA1(';admin=true', 
 			key_length +len( msg + calculate_SHA_padding(key_length*'a' + msg).decode('hex')),
 			int(msg_sha1[:8],16), int(msg_sha1[8:16],16), int(msg_sha1[16:24],16), int(msg_sha1[24:32],16), int(msg_sha1[32:],16)).hash()

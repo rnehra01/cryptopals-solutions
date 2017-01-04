@@ -3,6 +3,8 @@ class __SHA1():
 	"""SHA1 implementation"""
 	'''
 	data : new data if prev_data_len=0 else addidtional forge data
+	pre_data_len : 0 if new data else non-zero
+	a,b,c,d,e : show stating internal state
 	'''
 	def __init__(self, data, prev_data_len = 0,
 		a = 0x67452301,
@@ -91,15 +93,3 @@ class __SHA1():
 		    hh += (hex(h)[2:]).rjust(8, '0')
 		return hh
 		
-
-if __name__ == '__main__':
-	import sha
-
-	print 'Input Message :',
-	message = raw_input()
-	key = 's3cr3tk5y'
-	sha1_message = __SHA1(key + message).hash()
-	print "SHA1(key || %s) = %s" % (repr(message), sha1_message)
-	
-	if (sha.new(key + message).hexdigest() == sha1_message):
-		print '[+] Implementation Success'
