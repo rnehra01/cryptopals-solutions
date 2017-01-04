@@ -26,7 +26,7 @@ class __SHA1():
 		#ml to 64-bit big-endian
 		ml = hex(ml*8)[2:]
 		ml = '0'*(16-len(ml)%16) + ml
-		#Append +4-bit length
+		#Append bit-length of data
 		self.data = self.data + ml
 		self.data = self.data.decode('hex')
 		
