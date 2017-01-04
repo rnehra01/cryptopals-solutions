@@ -1,4 +1,5 @@
 # Lenght-extension attack
+# https://blog.skullsecurity.org/2012/everything-you-need-to-know-about-hash-length-extension-attacks
 from SHA1 import __SHA1
 
 # Generates hex-encoded padding 
