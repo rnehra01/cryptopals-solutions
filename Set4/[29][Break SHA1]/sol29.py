@@ -1,8 +1,5 @@
 from SHA1 import __SHA1
 
-key = 's3cr3tk5y'
-msg = 'comment1=cooking%20MCs;userdata=foo;comment2=%20like%20a%20pound%20of%20bacon'
-msg_sha1 = __SHA1(key + msg).hash()
 
 # Generates hex-encoded padding 
 def calculate_SHA_padding(data):
@@ -13,6 +10,7 @@ def calculate_SHA_padding(data):
 	return padding
 
 def oracle(data):
+	key = 's3cr3tk5y'
 	return __SHA1(key + data).hash()
 
 def check_admin(data, hash_tag):
@@ -25,7 +23,11 @@ def check_admin(data, hash_tag):
 
 if __name__ == '__main__':
 
-	
+	msg = 'comment1=cooking%20MCs;userdata=foo;comment2=%20like%20a%20pound%20of%20bacon'
+	msg_sha1 =oracle(msg)
+
+	print 'Let the HACK begin ...\n'
+
 	for key_length in range(15):
 		print 'Trying key length : %d' % key_length
 		attack_msg = msg + calculate_SHA_padding(key_length*'a' + msg).decode('hex') + ';admin=true'

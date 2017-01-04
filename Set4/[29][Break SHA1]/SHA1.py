@@ -1,6 +1,9 @@
 
 class __SHA1():
 	"""SHA1 implementation"""
+	'''
+	data : new data if prev_data_len=0 else addidtional forge data
+	'''
 	def __init__(self, data, prev_data_len = 0,
 		a = 0x67452301,
 		b = 0xEFCDAB89,
@@ -9,6 +12,7 @@ class __SHA1():
 		e = 0xC3D2E1F0):
 
 		self.h = [a, b, c, d, e]
+		print self.h
 		self.data = data
 		self.prev_data_len = prev_data_len
 	
