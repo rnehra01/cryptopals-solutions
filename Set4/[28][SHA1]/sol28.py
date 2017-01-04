@@ -24,8 +24,8 @@ class __SHA1():
 		self.data = self.data + l*'00'
 
 		#ml to 64-bit big-endian
-		ml = hex(ml*8)[2:]
-		ml = '0'*(16-len(ml)%16) + ml
+		ml = hex(ml*8)[2:].rjust(16, '0')
+		
 		#Append bit-length of data
 		self.data = self.data + ml
 		self.data = self.data.decode('hex')
@@ -82,9 +82,13 @@ class __SHA1():
 		
 
 if __name__ == '__main__':
+	import sha
 
 	print 'Input Message :',
 	message = raw_input()
 	key = 's3cr3tk5y'
-	print "SHA1(key || %s) = %s" % (repr(message), __SHA1(key + message).hash())
+	sha1_message = __SHA1(key + message).hash()
+	print "SHA1(key || %s) = %s" % (repr(message), sha1_message)
 	
+	if (sha.new(key + message).hexdigest() == sha1_message):
+		print '[+] Implementation Success'
