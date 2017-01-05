@@ -1,3 +1,6 @@
+'''
+   This implementation is a minor modification of  from https://gist.github.com/tristanwietsma/5937448
+'''
 from array import array
 from string import join
 from struct import pack, unpack
@@ -114,6 +117,7 @@ class MD4:
 		self.C = (self.C + c) & 0xffffffff
 		self.D = (self.D + d) & 0xffffffff
 
+	# little-endian packing
 	def digest(self):
 		return BYTES_TO_HEX(TXT_TO_BYTES(pack('<IIII', self.A, self.B, self.C, self.D)))
 

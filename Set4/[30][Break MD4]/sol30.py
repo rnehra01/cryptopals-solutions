@@ -39,9 +39,11 @@ if __name__ == '__main__':
 		
 		# msg_MD4 is used to get internal state
 		last_internal_state = unpack('<IIII', msg_MD4.decode('hex'))
+
 		m = MD4(last_internal_state[0], last_internal_state[1], last_internal_state[2], last_internal_state[3])
 		m.update(';admin=true', 
 			key_length +len( msg + cal_MD4_pad(key_length*'a' + msg)))
+		
 		attack_hash = m.digest()
 		
 		if (check_admin(attack_msg, attack_hash)):
